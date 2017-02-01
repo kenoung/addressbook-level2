@@ -89,6 +89,9 @@ public class StorageFile {
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
          */
         File storage = path.toFile();
+        if (!storage.isFile()) {
+            throw new StorageOperationException("File deleted during operation: " + path);
+        }
         
         try (final Writer fileWriter =
                      new BufferedWriter(new FileWriter(path.toFile()))) {
@@ -114,7 +117,7 @@ public class StorageFile {
         // create empty file if not found
         File storageFile = path.toFile();
         if (!storageFile.isFile()) {
-            makeFile();
+            makeFile(storageFile);
         }
         
         try (final Reader fileReader =
@@ -138,7 +141,13 @@ public class StorageFile {
         }
     }
 
-    private void makeFile() throws StorageOperationException {
+    private void makeFile(File storageFile) throws StorageOperationException {
+        try {
+            storageFile.createNewFile();
+        } catch (IOException ioe) {
+            throw new StorageOperationException("Error writing to file: " + path);
+        }
+        
         final AddressBook empty = new AddressBook();
         save(empty);
     }
