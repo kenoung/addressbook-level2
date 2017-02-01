@@ -27,7 +27,7 @@ public class Street {
      * Returns true if a given string is a valid street name.
      */
     public static boolean isValidStreet(String test) {
-        return test.matches(STREET_VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(STREET_VALIDATION_REGEX);
     }
 
     /**

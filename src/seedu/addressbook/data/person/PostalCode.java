@@ -27,7 +27,7 @@ public class PostalCode {
      * Returns true if a given string is a valid postal code.
      */
     public static boolean isValidPostalCode(String test) {
-        return test.matches(POSTAL_CODE_VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(POSTAL_CODE_VALIDATION_REGEX);
     }
 
     /**

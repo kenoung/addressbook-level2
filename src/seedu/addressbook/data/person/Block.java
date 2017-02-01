@@ -27,7 +27,7 @@ public class Block {
      * Returns true if a given string is a valid block number.
      */
     public static boolean isValidBlock(String test) {
-        return test.matches(BLOCK_VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(BLOCK_VALIDATION_REGEX);
     }
 
     public String toString() {

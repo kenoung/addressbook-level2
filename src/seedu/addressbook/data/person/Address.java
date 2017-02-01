@@ -37,9 +37,17 @@ public class Address {
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         this.isPrivate = isPrivate;
         this.value = address;
-        this._addressArray = address.split(ADDRESS_SPLIT_REGEX);
+        this._addressArray = new String[NUMBER_OF_ADDRESS_ELEMENTS];
+        String[] tempAddressArray = address.split(ADDRESS_SPLIT_REGEX);
         
-        if (!isValidAddress(address) || _addressArray.length != NUMBER_OF_ADDRESS_ELEMENTS) {
+        for (int i=0; i<this._addressArray.length; i++) {
+            if (i < tempAddressArray.length) {
+                this._addressArray[i] = tempAddressArray[i];
+            } else {
+                this._addressArray[i] = "";
+            }
+        }
+        if (!isValidAddress(address)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         
