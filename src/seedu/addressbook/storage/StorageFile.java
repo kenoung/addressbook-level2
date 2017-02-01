@@ -88,6 +88,8 @@ public class StorageFile {
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
          */
+        File storage = path.toFile();
+        
         try (final Writer fileWriter =
                      new BufferedWriter(new FileWriter(path.toFile()))) {
 
@@ -109,8 +111,14 @@ public class StorageFile {
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
     public AddressBook load() throws StorageOperationException {
+        // create empty file if not found
+        File storageFile = path.toFile();
+        if (!storageFile.isFile()) {
+            makeFile();
+        }
+        
         try (final Reader fileReader =
-                     new BufferedReader(new FileReader(path.toFile()))) {
+                     new BufferedReader(new FileReader(storageFile))) {
 
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             final AdaptedAddressBook loaded = (AdaptedAddressBook) unmarshaller.unmarshal(fileReader);
@@ -119,18 +127,7 @@ public class StorageFile {
                 throw new StorageOperationException("File data missing some elements");
             }
             return loaded.toModelType();
-
-        /* Note: Here, we are using an exception to create the file if it is missing. However, we should minimize
-         * using exceptions to facilitate normal paths of execution. If we consider the missing file as a 'normal'
-         * situation (i.e. not truly exceptional) we should not use an exception to handle it.
-         */
-
-        // create empty file if not found
-        } catch (FileNotFoundException fnfe) {
-            final AddressBook empty = new AddressBook();
-            save(empty);
-            return empty;
-
+            
         // other errors
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
@@ -139,6 +136,11 @@ public class StorageFile {
         } catch (IllegalValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
+    }
+
+    private void makeFile() throws StorageOperationException {
+        final AddressBook empty = new AddressBook();
+        save(empty);
     }
 
     public String getPath() {
