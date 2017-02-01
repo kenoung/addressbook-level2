@@ -21,7 +21,7 @@ public class Address {
     private static final int UNIT_INDEX = 2;
     private static final int POSTAL_CODE_INDEX = 3;
     
-    public final String _address;
+    public final String value;
     public final String[] _addressArray;
     private final Block blockNumber;
     private final Street streetName;
@@ -36,7 +36,7 @@ public class Address {
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         this.isPrivate = isPrivate;
-        this._address = address;
+        this.value = address;
         this._addressArray = address.split(ADDRESS_SPLIT_REGEX);
         
         if (!isValidAddress(address) || _addressArray.length != NUMBER_OF_ADDRESS_ELEMENTS) {
@@ -44,12 +44,12 @@ public class Address {
         }
         
         try {
-            this.blockNumber = new Block(this._addressArray[BLOCK_INDEX]);
-            this.streetName = new Street(this._addressArray[STREET_INDEX]);
-            this.unitNumber = new Unit(this._addressArray[UNIT_INDEX]);
-            this.postalCode = new PostalCode(this._addressArray[POSTAL_CODE_INDEX]);
+            this.blockNumber = new Block(this._addressArray[BLOCK_INDEX].trim());
+            this.streetName = new Street(this._addressArray[STREET_INDEX].trim());
+            this.unitNumber = new Unit(this._addressArray[UNIT_INDEX].trim());
+            this.postalCode = new PostalCode(this._addressArray[POSTAL_CODE_INDEX].trim());
         } catch (IllegalValueException e) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS + e);
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS + "\n" + e.getMessage());
         }
         
     }
@@ -63,19 +63,19 @@ public class Address {
 
     @Override
     public String toString() {
-        return _address;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this._address.equals(((Address) other)._address)); // state check
+                && this.value.equals(((Address) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return _address.hashCode();
+        return value.hashCode();
     }
 
     public boolean isPrivate() {

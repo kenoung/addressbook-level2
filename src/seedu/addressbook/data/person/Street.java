@@ -7,7 +7,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Street {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Street name should be alphanumeric.";
-    public static final String STREET_VALIDATION_REGEX = "[a-zA-Z0-9]+";
+    public static final String STREET_VALIDATION_REGEX = "[a-zA-Z0-9 ]+";
     private final String _streetName;
 
     /**

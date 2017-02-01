@@ -6,7 +6,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Represents a Person's postal code in the address book.
  */
 public class PostalCode {
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Unit number should start with a hex.";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Postal code should consist of 6 digits i.e. 130998";
     public static final String POSTAL_CODE_VALIDATION_REGEX = "[0-9]{6}";
     private final String _postalCode;
 

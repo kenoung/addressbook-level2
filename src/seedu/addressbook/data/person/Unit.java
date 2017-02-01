@@ -6,8 +6,8 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Represents a Person's unit in the address book.
  */
 public class Unit {
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Unit number should start with a hex.";
-    public static final String UNIT_VALIDATION_REGEX = "#[0-9]{2}-[0-9]{2}";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Unit number should be in the format #02-25.";
+    public static final String UNIT_VALIDATION_REGEX = "#[0-9]{2,3}-[0-9]{2,3}";
     private final String _unitNumber;
 
     /**
