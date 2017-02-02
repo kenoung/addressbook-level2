@@ -8,7 +8,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Block {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Block number should be numeric.";
     public static final String BLOCK_VALIDATION_REGEX = "\\d+";
-    private final String _block;
+    private String _block;
 
     /**
      * Validates given block number.
@@ -20,7 +20,7 @@ public class Block {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         
-        this._block = blockNumber;
+        this.setBlock(blockNumber);
     }
 
     /**
@@ -30,7 +30,23 @@ public class Block {
         return test.isEmpty() || test.matches(BLOCK_VALIDATION_REGEX);
     }
 
-    public String toString() {
-        return this._block;
+    /**
+     * @return the _block
+     */
+    public String getBlock() {
+        return _block;
     }
+
+    /**
+     * @param blockNumber the blockNumber to set
+     * @throws IllegalValueException  if given blockNumber is invalid.
+     */
+    public void setBlock(String blockNumber) throws IllegalValueException {
+        if (!isValidBlock(blockNumber)) {
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+        
+        this._block = blockNumber;
+    }
+
 }

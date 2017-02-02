@@ -93,28 +93,28 @@ public class Address {
     /**
      * @return the blockNumber
      */
-    public String getBlockNumber() {
-        return blockNumber.toString();
+    public Block getBlockNumber() {
+        return blockNumber;
     }
 
     /**
      * @return the streetName
      */
-    public String getStreetName() {
-        return streetName.toString();
+    public Street getStreetName() {
+        return streetName;
     }
 
     /**
      * @return the unitNumber
      */
-    public String getUnitNumber() {
-        return unitNumber.toString();
+    public Unit getUnitNumber() {
+        return unitNumber;
     }
 
     /**
      * @return the postalCode
      */
-    public String getPostalCode() {
-        return postalCode.toString();
+    public PostalCode getPostalCode() {
+        return postalCode;
     }
 }

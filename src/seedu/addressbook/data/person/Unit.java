@@ -8,7 +8,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Unit {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Unit number should be in the format #02-25.";
     public static final String UNIT_VALIDATION_REGEX = "#[0-9]{2,3}-[0-9]{2,3}";
-    private final String _unitNumber;
+    private String _unitNumber;
 
     /**
      * Validates given unit number.
@@ -20,7 +20,7 @@ public class Unit {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         
-        this._unitNumber = unitNumber;
+        this.setUnitNumber(unitNumber);
     }
 
     /**
@@ -31,10 +31,22 @@ public class Unit {
     }
 
     /**
-     * Returns unit number.
+     * @return the _unitNumber
      */
-    public String toString() {
+    public String getUnitNumber() {
         return _unitNumber;
+    }
+
+    /**
+     * @param unitNumber the unitNumber to set
+     * @throws IllegalValueException if given unit number is invalid
+     */
+    public void setUnitNumber(String unitNumber) throws IllegalValueException {
+        if (!isValidUnit(unitNumber)) {
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+        
+        this._unitNumber = unitNumber;
     }
 }
 

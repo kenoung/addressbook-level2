@@ -8,7 +8,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Street {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Street name should be alphanumeric.";
     public static final String STREET_VALIDATION_REGEX = "[a-zA-Z0-9 ]+";
-    private final String _streetName;
+    private String _streetName;
 
     /**
      * Validates given street name.
@@ -20,7 +20,7 @@ public class Street {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         
-        this._streetName = streetName;
+        this.setStreetName(streetName);
     }
 
     /**
@@ -31,9 +31,21 @@ public class Street {
     }
 
     /**
-     * Returns street name.
+     * @return the _streetName
      */
-    public String toString() {
+    public String getStreetName() {
         return _streetName;
+    }
+
+    /**
+     * @param streetName the streetName to set
+     * @throws IllegalValueException if given street name is valid
+     */
+    public void setStreetName(String streetName) throws IllegalValueException {
+        if (!isValidStreet(streetName)) {
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+        
+        this._streetName = streetName;
     }
 }

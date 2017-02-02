@@ -8,7 +8,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class PostalCode {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Postal code should consist of 6 digits i.e. 130998";
     public static final String POSTAL_CODE_VALIDATION_REGEX = "[0-9]{6}";
-    private final String _postalCode;
+    private String _postalCode;
 
     /**
      * Validates given postal code.
@@ -20,7 +20,7 @@ public class PostalCode {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         
-        this._postalCode = postalCode;
+        this.setPostalCode(postalCode);
     }
 
     /**
@@ -31,10 +31,22 @@ public class PostalCode {
     }
 
     /**
-     * Returns postal code.
+     * @return the _postalCode
      */
-    public String toString() {
+    public String getPostalCode() {
         return _postalCode;
+    }
+
+    /**
+     * @param _postalCode the _postalCode to set
+     * @throws IllegalValueException if given postal code is invalid.
+     */
+    public void setPostalCode(String postalCode) throws IllegalValueException {
+        if (!isValidPostalCode(postalCode)) {
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+        
+        this._postalCode = postalCode;
     }
 }
 
