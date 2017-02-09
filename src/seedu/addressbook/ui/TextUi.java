@@ -4,7 +4,9 @@ import static seedu.addressbook.common.Messages.*;
 
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.common.Utils;
+import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.tag.Tagging;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -127,6 +129,26 @@ public class TextUi {
             showPersonListView(resultPersons.get());
         }
         showToUser(result.feedbackToUser, DIVIDER);
+    }
+    
+    /**
+     * Shows the changes to tags on exit.
+     * 
+     * e.g.
+     * + Jake Woo [friend]
+     * - Jake Woo [colleague]
+     * + Jean Wong [client]
+     */
+    public void showTagsAddedOrDeletedOnExit(List<Tagging> taggings) {
+        StringBuilder builder = new StringBuilder();
+        
+        for (Tagging tagging : taggings) {
+            builder.append(tagging.toString()).append(System.lineSeparator());
+        }
+        
+        if (!builder.toString().isEmpty()) {
+            showToUser(builder.toString());
+        }
     }
 
     /**

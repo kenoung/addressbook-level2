@@ -3,9 +3,12 @@ package seedu.addressbook.data;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.person.UniquePersonList.*;
 import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.tag.Tagging.Operation;
 import seedu.addressbook.data.tag.UniqueTagList.*;
 import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.Tagging;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -22,6 +25,7 @@ public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
+    private final ArrayList<Tagging> allTaggings;
 
     /**
      * Creates an empty address book.
@@ -29,6 +33,7 @@ public class AddressBook {
     public AddressBook() {
         allPersons = new UniquePersonList();
         allTags = new UniqueTagList();
+        allTaggings = new ArrayList<Tagging>();
     }
 
     /**
@@ -41,6 +46,8 @@ public class AddressBook {
     public AddressBook(UniquePersonList persons, UniqueTagList tags) {
         this.allPersons = new UniquePersonList(persons);
         this.allTags = new UniqueTagList(tags);
+        this.allTaggings = new ArrayList<Tagging>();
+        
         for (Person p : allPersons) {
             syncTagsWithMasterList(p);
         }
@@ -142,5 +149,24 @@ public class AddressBook {
      */
     public UniqueTagList getAllTags() {
         return new UniqueTagList(allTags);
+    }
+
+    /**
+     * @return an Arraylist of Tagging objects in this session
+     */
+    public ArrayList<Tagging> getAllTaggings() {
+        return allTaggings;
+    }
+    
+    /**
+     * Adds a new tagging to the list. 
+     * 
+     * @param tag 
+     * @param person who is tagged
+     * @param operation i.e. add or delete.
+     */
+    public void addTagging(Tag tag, Person person, Operation operation) {
+        Tagging tagging = new Tagging(tag, person, operation);
+        allTaggings.add(tagging);
     }
 }
