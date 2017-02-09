@@ -64,7 +64,10 @@ public class Name implements Printable {
 
     @Override
     public String getPrintableString() {
-        return LABEL + fullName;
+        StringBuilder builder = new StringBuilder();
+        builder.append(LABEL).append(fullName);
+        
+        return builder.toString();
     }
 
 }

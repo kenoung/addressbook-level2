@@ -14,6 +14,7 @@ public class Person implements ReadOnlyPerson {
     private Phone phone;
     private Email email;
     private Address address;
+    private static final String PRINTABLE_DELIMITER = " | ";
 
     private final UniqueTagList tags;
     /**
@@ -65,6 +66,19 @@ public class Person implements ReadOnlyPerson {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
+    
+    /**
+     * Returns a concatenated version of the printable strings of each object.
+     */
+   public String getPrintableString(Printable... printables){
+       final StringBuilder builder = new StringBuilder();
+       
+       for (Printable printable : printables) {
+           builder.append(printable.getPrintableString()).append(PRINTABLE_DELIMITER);
+       }
+       
+       return builder.toString();
+   }
 
     @Override
     public boolean equals(Object other) {

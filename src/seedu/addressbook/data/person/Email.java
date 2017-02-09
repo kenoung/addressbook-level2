@@ -9,6 +9,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Email implements Printable {
 
     private static final String LABEL = "Email: ";
+    private static final String LABEL_PRIVATE = " (private) ";
     public static final String EXAMPLE = "valid@e.mail";
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
@@ -62,6 +63,13 @@ public class Email implements Printable {
 
     @Override
     public String getPrintableString() {
-        return LABEL + value;
+        StringBuilder builder = new StringBuilder();
+        builder.append(LABEL).append(value);
+        
+        if (isPrivate()) {
+            builder.append(LABEL_PRIVATE);
+        }
+        
+        return builder.toString();
     }
 }
