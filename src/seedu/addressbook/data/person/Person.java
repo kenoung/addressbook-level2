@@ -14,7 +14,7 @@ public class Person implements ReadOnlyPerson {
     private Phone phone;
     private Email email;
     private Address address;
-    private static final String PRINTABLE_DELIMITER = " | ";
+    private static final String PRINTABLE_DELIMITER = " ";
 
     private final UniqueTagList tags;
     /**

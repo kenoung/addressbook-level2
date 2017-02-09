@@ -9,7 +9,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Phone implements Printable {
 
     private static final String LABEL = "Phone: ";
-    private static final String LABEL_PRIVATE = " (private) ";
+    private static final String LABEL_PRIVATE = "(private) ";
     public static final String EXAMPLE = "123456789";
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
@@ -62,12 +62,13 @@ public class Phone implements Printable {
     @Override
     public String getPrintableString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(LABEL).append(value);
+        builder.append(LABEL);
         
         if (isPrivate()) {
             builder.append(LABEL_PRIVATE);
         }
         
+        builder.append(value);
         return builder.toString();
     }
 }

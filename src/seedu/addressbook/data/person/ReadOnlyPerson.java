@@ -43,8 +43,7 @@ public interface ReadOnlyPerson {
     default String getAsTextShowAll() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getPrintableString(getName(), getPhone(), getEmail(), getAddress()));
-        builder.append(getAddress())
-                .append(" Tags: ");
+        builder.append("Tags: ");
         for (Tag tag : getTags()) {
             builder.append(tag);
         }

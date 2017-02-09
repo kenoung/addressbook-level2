@@ -9,7 +9,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Address implements Printable {
     
     private static final String LABEL = "Address: ";
-    private static final String LABEL_PRIVATE = " (private) ";
+    private static final String LABEL_PRIVATE = "(private) ";
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
@@ -61,12 +61,13 @@ public class Address implements Printable {
     @Override
     public String getPrintableString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(LABEL).append(value);
+        builder.append(LABEL);
         
         if (isPrivate()) {
             builder.append(LABEL_PRIVATE);
         }
         
+        builder.append(value);
         return builder.toString();
     }
 }

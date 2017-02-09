@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class Name implements Printable {
 
-    private static final String LABEL = "Name: ";
     public static final String EXAMPLE = "John Doe";
     public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should be spaces or alphabetic characters";
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alpha} ]+";
@@ -65,7 +64,7 @@ public class Name implements Printable {
     @Override
     public String getPrintableString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(LABEL).append(fullName);
+        builder.append(fullName);
         
         return builder.toString();
     }
