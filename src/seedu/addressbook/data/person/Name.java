@@ -53,10 +53,10 @@ public class Name {
          if (other == null) {
              throw new IllegalValueException("Other name cannot be null.");
          }
-         return getNumberOfMatchingTokens(this.fullName, other.fullName) >= 2;
+         return numberOfMatchingTokens(this.fullName, other.fullName) >= 2;
      }
 
-    private int getNumberOfMatchingTokens(String firstName, String secondName) {
+    private int numberOfMatchingTokens(String firstName, String secondName) {
         int numberOfMatchingTokens = 0;
         for (String token : firstName.split(" ")) {
             if (Arrays.asList(secondName.split(" ")).contains(token)) {
