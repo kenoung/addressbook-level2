@@ -49,21 +49,21 @@ public class Name {
      * This function is case-insensitive. 
      * @throws IllegalValueException when input name is null
      */
-     public boolean isSimilar(Name other) throws IllegalValueException {
+    public boolean isSimilar(Name other) throws IllegalValueException {
          if (other == null) {
              throw new IllegalValueException("Other name cannot be null.");
          }
-         return numberOfMatchingTokens(this.fullName, other.fullName) >= 2;
+         return numberOfMatchingTokens(this.fullName.toLowerCase(), other.fullName.toLowerCase()) >= 2;
      }
 
     private int numberOfMatchingTokens(String firstName, String secondName) {
-        int numberOfMatchingTokens = 0;
+        int matchingTokenCount = 0;
         for (String token : firstName.split(" ")) {
             if (Arrays.asList(secondName.split(" ")).contains(token)) {
-                numberOfMatchingTokens++;
+                matchingTokenCount++;
             }
         }
-        return numberOfMatchingTokens;
+        return matchingTokenCount;
     }
 
     @Override
