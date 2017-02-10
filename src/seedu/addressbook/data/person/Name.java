@@ -53,17 +53,25 @@ public class Name {
          if (other == null) {
              throw new IllegalValueException("Other name cannot be null.");
          }
-         return numberOfMatchingTokens(this.fullName.toLowerCase(), other.fullName.toLowerCase()) >= 2;
+         return numberOfMatchingTokens(this.fullName, other.fullName) >= 2;
      }
 
     private int numberOfMatchingTokens(String firstName, String secondName) {
         int matchingTokenCount = 0;
-        for (String token : firstName.split(" ")) {
-            if (Arrays.asList(secondName.split(" ")).contains(token)) {
+        for (String token : tokenize(firstName)) {
+            if (isTokenInName(token, secondName)) {
                 matchingTokenCount++;
             }
         }
         return matchingTokenCount;
+    }
+
+    public boolean isTokenInName(String token, String secondName) {
+        return Arrays.asList(tokenize(secondName)).contains(token);
+    }
+
+    public String[] tokenize(String name) {
+        return name.toLowerCase().split(" ");
     }
 
     @Override
