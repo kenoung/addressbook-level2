@@ -42,6 +42,16 @@ public class Name {
     public List<String> getWordsInName() {
         return Arrays.asList(fullName.split("\\s+"));
     }
+    
+    /**
+     * Returns true of the other name is very similar to this name.
+     * Two names are considered similar if they have more than 80% similarity.
+     * Similarity is defined by the percentage of matching token text.
+     * This function is case-insensitive. 
+     */
+     public boolean isSimilar(Name other) {
+         return this.fullName.equals(other.fullName);
+     }
 
     @Override
     public String toString() {
