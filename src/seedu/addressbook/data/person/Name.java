@@ -45,13 +45,22 @@ public class Name {
     
     /**
      * Returns true of the other name is very similar to this name.
-     * Two names are considered similar if they have more than 80% similarity.
-     * Similarity is defined by the percentage of matching token text.
+     * Two names are considered similar if they have at least 2 matching word tokens.
      * This function is case-insensitive. 
      */
      public boolean isSimilar(Name other) {
-         return this.fullName.equals(other.fullName);
+         return getNumberOfMatchingTokens(this.fullName, other.fullName) >= 2;
      }
+
+    private int getNumberOfMatchingTokens(String firstName, String secondName) {
+        int numberOfMatchingTokens = 0;
+        for (String token : firstName.split(" ")) {
+            if (Arrays.asList(secondName.split(" ")).contains(token)) {
+                numberOfMatchingTokens++;
+            }
+        }
+        return numberOfMatchingTokens;
+    }
 
     @Override
     public String toString() {

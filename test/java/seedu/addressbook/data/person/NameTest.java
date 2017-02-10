@@ -20,6 +20,12 @@ public class NameTest {
     public void isSimilar_sameName_returnsTrue() throws IllegalValueException {
         Name otherName = new Name("Ken Oung Yong Quan");
         assertTrue(name.isSimilar(otherName));
+    }    
+
+    @Test
+    public void isSimilar_matchFirstTwoTokens_returnsTrue() throws IllegalValueException {
+        Name otherName = new Name("Ken Oung");
+        assertTrue(name.isSimilar(otherName));
     }
 
 }
