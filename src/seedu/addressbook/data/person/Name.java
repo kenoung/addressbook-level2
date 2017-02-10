@@ -47,8 +47,12 @@ public class Name {
      * Returns true of the other name is very similar to this name.
      * Two names are considered similar if they have at least 2 matching word tokens.
      * This function is case-insensitive. 
+     * @throws IllegalValueException when input name is null
      */
-     public boolean isSimilar(Name other) {
+     public boolean isSimilar(Name other) throws IllegalValueException {
+         if (other == null) {
+             throw new IllegalValueException("Other name cannot be null.");
+         }
          return getNumberOfMatchingTokens(this.fullName, other.fullName) >= 2;
      }
 
